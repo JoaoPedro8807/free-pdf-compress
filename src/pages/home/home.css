@@ -1,0 +1,17 @@
+.hiddenCard{
+    opacity: 0;
+    filter: blur(30px);
+    transform: translateX(-100%);
+    transition: all 2s;
+}
+
+.showCard{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    transition: all 1.3s;
+}   
+
+.section-more-about{
+    margin-bottom: 200px;
+}

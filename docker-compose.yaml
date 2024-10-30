@@ -1,0 +1,12 @@
+services:
+  api_pdf:
+    container_name: api_pdf
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:  
+      - ./api:/api
+    env_file:
+      - ./api/.env
+          
