@@ -4,7 +4,7 @@ Recentemente eu tive que ajudar meu pai a enviar alguns comprovantes o trabalho 
 
 O que parecia uma coisa fácil e simples só dava dor de cabeça. Primeiramente tentei o Adobe, porém para compactar vários arquivos em fila é necessário assinatura. Então tentei o IlovepDF, nele essa funcionalidade é grátis, porém não conseguia comprimir para menos de 100kb. Pesquisei outros, porém nenhum serviu.
 
-Como nenhum deles resolvia 100% meu problema, eu decidi fazer eu mesmo. Dei uma pesquisa sobre, e descobri uma biblioteca em Python que permite a fácil manipulação de arquivos (inclusive pdf). Então rápidamente fiz um script que lê os arquivos pdfs na minha pasta e salva em outra, resolvendo o problema. Mas para facilidade e aprendizado, aprimorei o script e implementei uma interface web para deixar tudo mais fácil para qualquer pessoa utilizar.
+Como nenhum deles resolvia 100% meu problema, eu decidi fazer eu mesmo. Dei uma pesquisa sobre, e descobri uma biblioteca em Python que permite a fácil manipulação de arquivos (inclusive pdf). Então rápidamente fiz um script que lê e manipula os parâmetros do arquivo, como margem, qualidade, largura e altura, e por estar em memória, consegue salvar em outro diretório,  resolvendo o problema. Mas para facilidade e aprendizado, aprimorei o script e implementei uma interface como um serviço web para deixar tudo mais fácil para qualquer pessoa utilizar.
 
 ![interface](public/pdf-compress-3.png)
 
