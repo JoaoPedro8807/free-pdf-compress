@@ -6,13 +6,25 @@ from ..forms import FileFieldForm
 from django.utils.decorators import method_decorator
 from compress import PDFCompression
 from compress.main import GenericFileType
-from typing import List, Union
+from typing import Any, Coroutine, List, Union, Protocol
 import io
 import zipfile
 import asyncio
 import time
 from asgiref.sync import sync_to_async
 
+
+class FileAbstract(Protocol):
+    def read(self) -> bytes:
+        ...
+    @property
+    def name(self) -> str:
+        pass
+
+    @property
+    def size(self) -> int:
+        ...
+        
 @method_decorator(csrf_exempt, name='dispatch')
 class CompressView(View):
     def __init__(self, **kwargs) -> None:
@@ -20,14 +32,13 @@ class CompressView(View):
     
     async def compress_file(
         self, 
-        file, 
+        file: FileAbstract, 
         compress_intance: PDFCompression, 
         zip_file: zipfile.ZipExtFile,
         quality: int
-        ) -> None:
+        ) -> Coroutine[any, any, any]:
         try:
             pdf_stream = await compress_intance.build(file=file.read(), quality=quality, name=file.name)
-            print('PDF_COMPRESSED: ', pdf_stream)
             self.files_compressed.append(pdf_stream)
             zip_file.writestr(f"{file.name}.pdf", pdf_stream.getvalue())
 
@@ -43,10 +54,12 @@ class CompressView(View):
         print('TIMEE', tempo1)
         form = FileFieldForm(request.POST, request.FILES)
         if form.is_valid():
+
             qualitys: List[int] = request.POST.getlist('quality')
             files = form.cleaned_data['file']
             corroutines: List[asyncio.Task] = []
             self.files_compressed: List[io.BytesIO] = []
+
             with PDFCompression() as compress:
                 zip_buffer = io.BytesIO()
                 with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:

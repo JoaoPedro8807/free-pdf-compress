@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+### PDF Compress
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Recentemente eu tive que ajudar meu pai a enviar alguns comprovantes o trabalho dele, porém na plataforma só aceitava arquivos PDF com menos de 100kb, então fui procurar algum compactador que pudesse comprimir varios arquivos.
 
-## Available Scripts
+O que parecia uma coisa fácil e simples só dava dor de cabeça. Primeiramente tentei o Adobe, porém para compactar vários arquivos em fila é necessário assinatura. Então tentei o IlovepDF, nele essa funcionalidade é grátis, porém não conseguia comprimir para menos de 100kb. Pesquisei outros, porém nenhum serviu.
 
-In the project directory, you can run:
+Como nenhum deles resolvia 100% meu problema, eu decidi fazer eu mesmo. Dei uma pesquisa sobre, e descobri uma biblioteca em Python que permite a fácil manipulação de arquivos (inclusive pdf). Então rápidamente fiz um script que lê os arquivos pdfs na minha pasta e salva em outra, resolvendo o problema. Mas para facilidade e aprendizado, aprimorei o script e implementei uma interface web para deixar tudo mais fácil para qualquer pessoa utilizar.
 
-### `npm start`
+![interface](public/pdf-compress-3.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![interface](public/pdf-compress-4.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![interface](public/pdf-1.png)
 
-### `npm test`
+![interface](public/pdf-compress-1.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![interface](public/pdf-compress-2.png)
 
-### `npm run build`
+![interface](public/pdf-compress-5.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![interface](public/pdf-2.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Como há a possibilidade do usuário enviar vários arquivos, resolvi implementar async views, para que eu pudesse deixar a compressão em corrotinas e assim, poder responder com os arquivos compactados mais rápido pro cliet, para isso utilizei o eventLoop asyncio e o asgiref que consegue dar suporte para as views async do Django.
 
-### `npm run eject`
+Ao enviar os arquivos e suas respectivas qualidades, a view do django captura os arquivos e qualides separados para depois fazer um zip dos dados. Logo após, faço o load do arquivo em memória com o BitysIO e mando para o compactador que utiliza o AsposeWords. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O comptactador pega o arquivo em memória e consegue dividir o pdf por imagens, e nessas imagens, consigo iterar e editar alguns parâmetros, como margens, qualidade, largura e altura. E para corrotina, eu passo uma instancia de um arquivo Zip em memória para que ao salvar, sobrescreva o mesmo arquivo.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Então retorno como resposta o arquivo zipado, onde consigo baixa-lo no client com o Blob Object. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+
