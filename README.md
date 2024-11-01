@@ -21,7 +21,7 @@ Como nenhum deles resolvia 100% meu problema, eu decidi fazer eu mesmo. Dei uma 
 ![interface](public/pdf-2.png)
 
 
-Como há a possibilidade do usuário enviar vários arquivos, resolvi implementar async views, para que eu pudesse deixar a compressão em corrotinas e assim, poder responder com os arquivos compactados mais rápido pro cliet, para isso utilizei o eventLoop asyncio e o asgiref que consegue dar suporte para as views async do Django.
+Como há a possibilidade do usuário enviar vários arquivos, resolvi implementar async views, para que eu pudesse deixar a compressão em corrotinas e assim, poder responder com os arquivos compactados mais rápido pro client, para isso utilizei o EventLoop asyncio e o asgiref que consegue dar suporte para as views async do Django.
 
 Ao enviar os arquivos e suas respectivas qualidades, a view do django captura os arquivos e qualides separados para depois fazer um zip dos dados. Logo após, faço o load do arquivo em memória com o BitysIO e mando para o compactador que utiliza o AsposeWords. 
 
