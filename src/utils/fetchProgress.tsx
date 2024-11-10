@@ -39,11 +39,13 @@ const ProgressBar = () => {
     }, [progress]);
 
     return (
+
         <Fragment>
             <Box>   
                 <Progress value={progress} variant="soft" />
             </Box>
         </Fragment>
+        
     );
 };
 
