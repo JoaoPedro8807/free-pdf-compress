@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Fragment, useState,} from 'react';
-import ProgressBar from '../../teste';
+import ProgressBar from '../../utils/fetchProgress';
 import Header from '../../components/Header';
 import Content from './Content'
 
