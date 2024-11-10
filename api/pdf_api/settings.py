@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-juv%6(64#fn-9w9jlea3+h#uep(v4&xu(5oj7_#uzuh4)#ad#%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
 #cors, allowed hosts and csrf
 ALLOWED_HOSTS = ["*"]
 
@@ -41,7 +39,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://172.25.240.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
-
 
 
 # Application definition
